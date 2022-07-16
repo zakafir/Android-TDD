@@ -1,5 +1,6 @@
 package com.raywenderlich.android.cocktails.game.model
 
+import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertNotNull
 import junit.framework.Assert.assertNull
@@ -10,6 +11,7 @@ import org.junit.Test
 class QuestionUnitTests {
     
     private lateinit var question : Question
+    
     @Before
     fun setup() {
         question = Question("CORRECT", "INCORRECT")
@@ -40,5 +42,11 @@ class QuestionUnitTests {
     @Test(expected = IllegalArgumentException::class)
     fun whenAnswering_withInvalidOption_shouldThrowException() {
         question.answer("INVALID")
+    }
+    
+    @Test
+    fun whenCreatingQuestion_shouldReturnOptionsWithCustomSort() {
+        val options = question.getOptions { it.reversed() }
+        assertEquals(listOf("INCORRECT", "CORRECT"), options)
     }
 }

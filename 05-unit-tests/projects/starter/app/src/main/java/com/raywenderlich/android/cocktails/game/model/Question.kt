@@ -18,4 +18,8 @@ class Question(
         )
         return isAnsweredCorrectly
     }
+    
+    fun getOptions(sort: (List<String>) -> List<String>): List<String> {
+        return sort(listOf(correctOption, incorrectOption))
+    }
 }
